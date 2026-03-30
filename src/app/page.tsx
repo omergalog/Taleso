@@ -177,7 +177,6 @@ function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 + book.delay }}
-              transition={{ duration: 0.6, delay: 0.3 + book.delay }}
               className="relative flex-shrink-0 w-36 h-48 md:w-44 md:h-60 rounded-2xl shadow-xl overflow-hidden cursor-pointer hover:-translate-y-3 hover:scale-105 transition-transform duration-100"
             >
               <img src={book.src} alt={book.title} className="w-full h-full object-cover" />
