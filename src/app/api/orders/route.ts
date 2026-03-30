@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const { name, gender, age, world, companions, lesson, dedication, email, phone } = body;
+    const { name, gender, age, trait, world, challenge, companions, lesson, dedication, email, phone } = body;
 
     // ולידציה בסיסית
     if (!name || !gender || !age || !world || !email || !phone) {
@@ -19,7 +19,9 @@ export async function POST(req: NextRequest) {
           hero_name: name,
           gender,
           age,
+          trait: trait ?? "",
           world,
+          challenge: challenge ?? "",
           companions: companions ?? [],
           lesson: lesson ?? "",
           dedication: dedication ?? "",

@@ -21,8 +21,10 @@ type FormData = {
   name: string;
   gender: "boy" | "girl" | "";
   age: string;
+  trait: string;
   // שלב 2
   world: string;
+  challenge: string;
   companions: { name: string; description: string }[];
   // שלב 3
   lesson: string;
@@ -48,6 +50,15 @@ const WORLDS = [
 ];
 
 const AGES = ["שנה", "שנתיים", "3", "4", "5", "6", "7", "8", "9+"];
+
+const TRAITS = [
+  { id: "brave", emoji: "🦁", label: "אמיץ" },
+  { id: "shy", emoji: "🐢", label: "ביישן" },
+  { id: "curious", emoji: "🔍", label: "סקרן" },
+  { id: "funny", emoji: "😄", label: "מצחיק" },
+  { id: "sensitive", emoji: "🌸", label: "רגיש" },
+  { id: "naughty", emoji: "😈", label: "שובב" },
+];
 
 const TOTAL_STEPS = 4;
 
@@ -86,7 +97,7 @@ function ProgressBar({ step }: { step: number }) {
 
 // ───────────────────────── שלב 1 – הגיבור ─────────────────────────
 
-function Step1({ data, update, showHint, onNonHebrew }: { data: FormData; update: (d: Partial<FormData>) => void; showHint: boolean; onNonHebrew: () => void }) {
+function Step1({ data, update, onNonHebrew }: { data: FormData; update: (d: Partial<FormData>) => void; showHint?: boolean; onNonHebrew: () => void }) {
   return (
     <div className="space-y-8">
       <div>
@@ -153,6 +164,30 @@ function Step1({ data, update, showHint, onNonHebrew }: { data: FormData; update
               }`}
             >
               {age}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* תכונת אופי */}
+      <div>
+        <label className="block text-sm font-bold text-gray-700 mb-1">
+          איך הייתם מתארים אותו/ה? <span className="text-gray-400 font-normal">(אופציונלי)</span>
+        </label>
+        <p className="text-xs text-gray-400 mb-3">בחרו תכונה אחת שהכי מתאימה</p>
+        <div className="grid grid-cols-3 gap-2">
+          {TRAITS.map((t) => (
+            <button
+              key={t.id}
+              onClick={() => update({ trait: data.trait === t.id ? "" : t.id })}
+              className={`py-3 rounded-2xl border-2 font-bold text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                data.trait === t.id
+                  ? "border-orange-400 bg-orange-50 text-orange-600"
+                  : "border-gray-100 bg-white text-gray-700 hover:border-orange-200"
+              }`}
+            >
+              <span>{t.emoji}</span>
+              {t.label}
             </button>
           ))}
         </div>
@@ -240,6 +275,22 @@ function Step2({ data, update, onNonHebrew }: { data: FormData; update: (d: Part
             className="w-full text-right text-sm bg-transparent focus:outline-none text-gray-700 placeholder:text-gray-400 font-medium"
           />
         </div>
+      </div>
+
+      {/* אתגר/בעיה */}
+      <div>
+        <label className="block text-sm font-bold text-gray-700 mb-1">
+          מה האתגר שהגיבור/ה צריך להתמודד איתו? <span className="text-gray-400 font-normal">(אופציונלי)</span>
+        </label>
+        <p className="text-xs text-gray-400 mb-3">למשל: לנצח בטורניר, למצוא חבר חדש, להתגבר על פחד מהחושך...</p>
+        <textarea
+          rows={2}
+          value={data.challenge}
+          onChange={(e) => { const f = hebrewOnly(e.target.value); if (hadNonHebrew(e.target.value, f)) onNonHebrew(); update({ challenge: f }); }}
+          placeholder="כתבו בחופשיות"
+          maxLength={150}
+          className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 focus:border-orange-300 focus:outline-none text-right resize-none bg-white"
+        />
       </div>
 
       {/* מי מצטרף */}
@@ -550,7 +601,9 @@ function QuestionnaireContent() {
     name: initialName,
     gender: "",
     age: "",
+    trait: "",
     world: "",
+    challenge: "",
     companions: [],
     lesson: "",
     dedication: "",
@@ -615,7 +668,9 @@ function QuestionnaireContent() {
           name: data.name,
           gender: data.gender,
           age: data.age,
+          trait: TRAITS.find((t) => t.id === data.trait)?.label ?? "",
           world: worldLabel,
+          challenge: data.challenge,
           companions: data.companions,
           lesson: data.lesson,
           dedication: data.dedication,
