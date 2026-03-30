@@ -163,7 +163,7 @@ function Hero() {
         transition={{ duration: 0.8, delay: 0.3 }}
         className="mt-16 w-full max-w-5xl"
       >
-        <div className="flex gap-4 justify-center items-center">
+        <div className="flex gap-4 items-center md:justify-center overflow-x-auto md:overflow-x-visible snap-x snap-mandatory px-6 md:px-0 pb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {[
             { src: "/book-tractor.png", title: "היום של מתן", delay: 0 },
             { src: "/book-lego.png", title: "יואב הבנאי", delay: 0.1 },
@@ -177,7 +177,7 @@ function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 + book.delay }}
-              className="relative flex-shrink-0 w-36 h-48 md:w-44 md:h-60 rounded-2xl shadow-xl overflow-hidden cursor-pointer hover:-translate-y-3 hover:scale-105 transition-transform duration-100"
+              className="relative flex-shrink-0 snap-start w-36 h-48 md:w-44 md:h-60 rounded-2xl shadow-xl overflow-hidden cursor-pointer hover:-translate-y-3 hover:scale-105 transition-transform duration-100"
             >
               <img src={book.src} alt={book.title} className="w-full h-full object-cover" />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
