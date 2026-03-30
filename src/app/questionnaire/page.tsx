@@ -411,7 +411,7 @@ function Step3({ data, update, onNonHebrew }: { data: FormData; update: (d: Part
                 {photo ? (
                   <img
                     src={URL.createObjectURL(photo)}
-                    alt={companion}
+                    alt={companion.name}
                     className="w-14 h-14 rounded-xl object-cover border-2 border-orange-200 flex-shrink-0"
                   />
                 ) : (
