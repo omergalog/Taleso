@@ -396,7 +396,7 @@ function Step2({ data, update, onNonHebrew }: { data: FormData; update: (d: Part
             />
             <button
               onClick={addCompanion}
-              disabled={!companionName.trim() || !companionDesc.trim()}
+              disabled={!companionName.trim() || companionDesc.trim().length < 2}
               className="px-4 py-3 bg-orange-500 text-white font-bold rounded-xl hover:bg-orange-600 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed whitespace-nowrap"
             >
               הוסף
