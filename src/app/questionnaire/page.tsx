@@ -52,12 +52,12 @@ const WORLDS = [
 const AGES = ["שנה", "שנתיים", "3", "4", "5", "6", "7", "8", "9+"];
 
 const TRAITS = [
-  { id: "brave", emoji: "🦁", label: "אמיץ" },
-  { id: "shy", emoji: "🐢", label: "ביישן" },
-  { id: "curious", emoji: "🔍", label: "סקרן" },
-  { id: "funny", emoji: "😄", label: "מצחיק" },
-  { id: "sensitive", emoji: "🌸", label: "רגיש" },
-  { id: "naughty", emoji: "😈", label: "שובב" },
+  { id: "brave", emoji: "🦁", label: "אומץ" },
+  { id: "shy", emoji: "🐢", label: "ביישנות" },
+  { id: "curious", emoji: "🔍", label: "סקרנות" },
+  { id: "funny", emoji: "😄", label: "הומור" },
+  { id: "sensitive", emoji: "🌸", label: "רגישות" },
+  { id: "naughty", emoji: "😈", label: "שובבות" },
 ];
 
 const TOTAL_STEPS = 4;
@@ -175,7 +175,7 @@ function Step1({ data, update, onNonHebrew }: { data: FormData; update: (d: Part
           איך הייתם מתארים אותו/ה? <span className="text-gray-400 font-normal">(אופציונלי)</span>
         </label>
         <p className="text-xs text-gray-400 mb-3">בחרו תכונה אחת שהכי מתאימה</p>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-3 gap-2 mb-2">
           {TRAITS.map((t) => (
             <button
               key={t.id}
@@ -190,6 +190,27 @@ function Step1({ data, update, onNonHebrew }: { data: FormData; update: (d: Part
               {t.label}
             </button>
           ))}
+        </div>
+        <div
+          className={`rounded-2xl border-2 border-dashed px-5 py-3 transition-all cursor-text ${
+            data.trait && !TRAITS.find((t) => t.id === data.trait)
+              ? "border-orange-400 bg-orange-50"
+              : "border-gray-300 bg-gray-50 hover:border-orange-300 hover:bg-orange-50"
+          }`}
+        >
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-lg">✍️</span>
+            <p className="text-sm font-black text-gray-700">או כתבו תכונה משלכם</p>
+          </div>
+          <input
+            type="text"
+            placeholder="למשל: חולמנות, נדיבות, אהבת חיות..."
+            value={!TRAITS.find((t) => t.id === data.trait) ? data.trait : ""}
+            onFocus={() => { if (TRAITS.find((t) => t.id === data.trait)) update({ trait: "" }); }}
+            onChange={(e) => { const f = hebrewOnly(e.target.value); if (hadNonHebrew(e.target.value, f)) onNonHebrew(); update({ trait: f }); }}
+            maxLength={30}
+            className="w-full text-right text-sm bg-transparent focus:outline-none text-gray-700 placeholder:text-gray-400 font-medium"
+          />
         </div>
       </div>
     </div>
