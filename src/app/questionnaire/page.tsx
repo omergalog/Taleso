@@ -230,12 +230,12 @@ function Step2({ data, update, onNonHebrew }: { data: FormData; update: (d: Part
     if (!name) return;
     const letters = (name.match(/[א-תa-zA-Z]/g) || []).length;
     const hasNumbers = /\d/.test(name);
-    const hasSpecial = /[#@!$%^&*()_+=\[\]{};':"\\|,.<>\/?]/.test(name);
+    const hasSpecial = /[#@!$%^&*()_+=\[\]{};:"\\|,.<>\/?]/.test(name);
     if (letters < 2 || hasNumbers || hasSpecial) {
       setCompanionError("נא להזין שם תקין");
       return;
     }
-    if (!description) {
+    if (description.length < 2) {
       setCompanionError("נא להוסיף תיאור קצר לדמות");
       return;
     }
