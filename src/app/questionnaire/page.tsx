@@ -282,12 +282,12 @@ function Step2({ data, update, onNonHebrew }: { data: FormData; update: (d: Part
         <label className="block text-sm font-bold text-gray-700 mb-1">
           מה קורה לגיבור/ה בסיפור? <span className="text-gray-400 font-normal">(אופציונלי)</span>
         </label>
-        <p className="text-xs text-gray-400 mb-3">האתגר שהגיבור/ה יצטרך/תצטרך להתמודד איתו</p>
+        <p className="text-xs text-gray-400 mb-3">למשל: מפחד להיכנס לגן חדש, מגלה גור אבוד ביער, רב עם החבר הכי טוב שלו...</p>
         <textarea
           rows={2}
           value={data.challenge}
           onChange={(e) => { const f = hebrewOnly(e.target.value); if (hadNonHebrew(e.target.value, f)) onNonHebrew(); update({ challenge: f }); }}
-          placeholder="למשל: הוא מנסה לבקע שער בגמר אבל חושש שייכשל..."
+          placeholder="למשל: היא מפחדת להיכנס לגן חדש ורוצה שאמא תישאר איתה..."
           maxLength={150}
           className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 focus:border-orange-300 focus:outline-none text-right resize-none bg-white"
         />
@@ -301,12 +301,12 @@ function Step2({ data, update, onNonHebrew }: { data: FormData; update: (d: Part
         <label className="block text-sm font-bold text-gray-700 mb-1">
           מה תרצו שהוא/היא ילמד/תלמד? <span className="text-gray-400 font-normal">(אופציונלי)</span>
         </label>
-        <p className="text-xs text-gray-400 mb-3">הערך או השיעור שיעבור לאורך הסיפור</p>
+        <p className="text-xs text-gray-400 mb-3">למשל: שחברות שווה יותר מכל צעצוע, שאפשר להתגבר על פחדים, שעזרה לאחרים מרגישה טוב...</p>
         <textarea
           rows={2}
           value={data.lesson}
           onChange={(e) => { const f = hebrewOnly(e.target.value); if (hadNonHebrew(e.target.value, f)) onNonHebrew(); update({ lesson: f }); }}
-          placeholder="למשל: שמאמץ ואמונה בעצמך חשובים יותר מניצחון..."
+          placeholder="למשל: שגם כשמפחדים אפשר לנסות, ולרוב מגלים שזה לא מפחיד כמו שחשבנו..."
           maxLength={150}
           className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 focus:border-orange-300 focus:outline-none text-right resize-none bg-white"
         />
