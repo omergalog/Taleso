@@ -280,17 +280,39 @@ function Step2({ data, update, onNonHebrew }: { data: FormData; update: (d: Part
       {/* אתגר/בעיה */}
       <div>
         <label className="block text-sm font-bold text-gray-700 mb-1">
-          מה האתגר שהגיבור/ה צריך להתמודד איתו? <span className="text-gray-400 font-normal">(אופציונלי)</span>
+          מה קורה לגיבור/ה בסיפור? <span className="text-gray-400 font-normal">(אופציונלי)</span>
         </label>
-        <p className="text-xs text-gray-400 mb-3">למשל: לנצח בטורניר, למצוא חבר חדש, להתגבר על פחד מהחושך...</p>
+        <p className="text-xs text-gray-400 mb-3">האתגר שהגיבור/ה יצטרך/תצטרך להתמודד איתו</p>
         <textarea
           rows={2}
           value={data.challenge}
           onChange={(e) => { const f = hebrewOnly(e.target.value); if (hadNonHebrew(e.target.value, f)) onNonHebrew(); update({ challenge: f }); }}
-          placeholder="כתבו בחופשיות"
+          placeholder="למשל: הוא מנסה לבקע שער בגמר אבל חושש שייכשל..."
           maxLength={150}
           className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 focus:border-orange-300 focus:outline-none text-right resize-none bg-white"
         />
+        {data.challenge.length > 100 && (
+          <p className="text-xs text-gray-400 mt-1 text-left">{data.challenge.length}/150</p>
+        )}
+      </div>
+
+      {/* מה ילמד */}
+      <div>
+        <label className="block text-sm font-bold text-gray-700 mb-1">
+          מה תרצו שהוא/היא ילמד/תלמד? <span className="text-gray-400 font-normal">(אופציונלי)</span>
+        </label>
+        <p className="text-xs text-gray-400 mb-3">הערך או השיעור שיעבור לאורך הסיפור</p>
+        <textarea
+          rows={2}
+          value={data.lesson}
+          onChange={(e) => { const f = hebrewOnly(e.target.value); if (hadNonHebrew(e.target.value, f)) onNonHebrew(); update({ lesson: f }); }}
+          placeholder="למשל: שמאמץ ואמונה בעצמך חשובים יותר מניצחון..."
+          maxLength={150}
+          className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 focus:border-orange-300 focus:outline-none text-right resize-none bg-white"
+        />
+        {data.lesson.length > 100 && (
+          <p className="text-xs text-gray-400 mt-1 text-left">{data.lesson.length}/150</p>
+        )}
       </div>
 
       {/* מי מצטרף */}
@@ -490,25 +512,6 @@ function Step3({ data, update, onNonHebrew }: { data: FormData; update: (d: Part
           })}
         </div>
       )}
-
-      {/* משהו ללמוד */}
-      <div>
-        <label className="block text-sm font-bold text-gray-700 mb-1">
-          משהו שתרצו לחזק? <span className="text-gray-400 font-normal">(אופציונלי)</span>
-        </label>
-        <p className="text-xs text-gray-400 mb-3">למשל: להתמודד עם פחדים, שיתוף, התחלה בגן חדש...</p>
-        <textarea
-          rows={2}
-          value={data.lesson}
-          onChange={(e) => { const f = hebrewOnly(e.target.value); if (hadNonHebrew(e.target.value, f)) onNonHebrew(); update({ lesson: f }); }}
-          placeholder="כתבו בחופשיות"
-          maxLength={150}
-          className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 focus:border-orange-300 focus:outline-none text-right resize-none bg-white"
-        />
-        {data.lesson.length > 100 && (
-          <p className="text-xs text-gray-400 mt-1 text-left">{data.lesson.length}/150</p>
-        )}
-      </div>
 
       {/* הקדשה */}
       <div>
