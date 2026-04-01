@@ -652,16 +652,26 @@ function QuestionnaireContent() {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const { step: savedStep, data: savedData } = JSON.parse(saved);
-        setStep(savedStep || 1);
-        setData((prev) => ({
-          ...savedData,
-          photo: null,
-          companionPhotos: [],
-          companions: Array.isArray(savedData.companions) ? savedData.companions.map((c: any) =>
-      typeof c === "string" ? { name: c, description: "" } : c
-    ) : [],
-          name: initialName || savedData.name || "",
-        }));
+        const savedName = savedData.name || "";
+        // שם שונה → איפוס מלא
+        if (initialName && initialName !== savedName) {
+          localStorage.removeItem(STORAGE_KEY);
+          setData((prev) => ({ ...prev, name: initialName }));
+        } else {
+          // אותו שם או בלי שם → המשך מאותה נקודה
+          setStep(savedStep || 1);
+          setData((prev) => ({
+            ...savedData,
+            photo: null,
+            companionPhotos: [],
+            companions: Array.isArray(savedData.companions) ? savedData.companions.map((c: any) =>
+              typeof c === "string" ? { name: c, description: "" } : c
+            ) : [],
+            name: initialName || savedName,
+          }));
+        }
+      } else if (initialName) {
+        setData((prev) => ({ ...prev, name: initialName }));
       }
     } catch {}
     setLoaded(true);
