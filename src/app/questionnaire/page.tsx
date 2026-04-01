@@ -674,11 +674,17 @@ function QuestionnaireContent() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ step, data: dataWithoutFiles }));
   }, [step, data, loaded]);
 
+  // גלילה לראש העמוד בכל מעבר שלב
+  useEffect(() => {
+    if (!loaded) return;
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+  }, [step]);
+
   const update = (partial: Partial<FormData>) =>
     setData((prev) => ({ ...prev, ...partial }));
 
-  const next = () => { setStep((s) => Math.min(s + 1, TOTAL_STEPS)); window.scrollTo({ top: 0, behavior: "smooth" }); };
-  const back = () => { setStep((s) => Math.max(s - 1, 1)); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const next = () => setStep((s) => Math.min(s + 1, TOTAL_STEPS));
+  const back = () => setStep((s) => Math.max(s - 1, 1));
 
   const submitOrder = async () => {
     setSubmitting(true);
