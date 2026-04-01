@@ -157,7 +157,7 @@ function Step1({ data, update, onNonHebrew }: { data: FormData; update: (d: Part
             <button
               key={age}
               onClick={() => update({ age })}
-              className={`py-2 rounded-xl border-2 font-bold text-sm transition-all cursor-pointer text-center ${
+              className={`py-2 rounded-xl border-2 font-bold text-xs md:text-sm transition-all cursor-pointer text-center ${
                 data.age === age
                   ? "border-orange-400 bg-orange-50 text-orange-600"
                   : "border-gray-100 bg-white text-gray-600 hover:border-orange-200"
