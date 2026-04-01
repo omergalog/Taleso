@@ -152,12 +152,12 @@ function Step1({ data, update, onNonHebrew }: { data: FormData; update: (d: Part
       {/* גיל */}
       <div>
         <label className="block text-sm font-bold text-gray-700 mb-3">גיל *</label>
-        <div className="grid grid-cols-9 gap-2">
+        <div className="grid grid-cols-5 md:grid-cols-9 gap-2">
           {AGES.map((age) => (
             <button
               key={age}
               onClick={() => update({ age })}
-              className={`py-2 rounded-xl border-2 font-bold text-xs md:text-sm transition-all cursor-pointer text-center ${
+              className={`py-2 rounded-xl border-2 font-bold text-sm transition-all cursor-pointer text-center ${
                 data.age === age
                   ? "border-orange-400 bg-orange-50 text-orange-600"
                   : "border-gray-100 bg-white text-gray-600 hover:border-orange-200"
