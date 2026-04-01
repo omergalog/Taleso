@@ -677,8 +677,8 @@ function QuestionnaireContent() {
   const update = (partial: Partial<FormData>) =>
     setData((prev) => ({ ...prev, ...partial }));
 
-  const next = () => setStep((s) => Math.min(s + 1, TOTAL_STEPS));
-  const back = () => setStep((s) => Math.max(s - 1, 1));
+  const next = () => { setStep((s) => Math.min(s + 1, TOTAL_STEPS)); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const back = () => { setStep((s) => Math.max(s - 1, 1)); window.scrollTo({ top: 0, behavior: "smooth" }); };
 
   const submitOrder = async () => {
     setSubmitting(true);
